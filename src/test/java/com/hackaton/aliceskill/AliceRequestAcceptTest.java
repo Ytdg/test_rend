@@ -26,6 +26,54 @@ public class AliceRequestAcceptTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    String generateResponse(){
+        return "{\n" +
+                "  \"response\": {\n" +
+                "    \"text\": \"Здравствуйте! Это мы, хороводоведы.\",\n" +
+                "    \"tts\": \"Здравствуйте! Это мы, хоров+одо в+еды.\",\n" +
+                "    \"card\": {\n" +
+                "     \n" +
+                "    },     \n" +
+                "    \"buttons\": [\n" +
+                "        {\n" +
+                "            \"title\": \"Надпись на кнопке\",\n" +
+                "            \"payload\": {},\n" +
+                "            \"url\": \"https://example.com/\",\n" +
+                "            \"hide\": true\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"end_session\": false,\n" +
+                "    \"directives\": {}\n" +
+                "  },\n" +
+                "  \"session_state\": {\n" +
+                "      \"value\": 10\n" +
+                "  },\n" +
+                "  \"user_state_update\": {\n" +
+                "      \"value\": 42\n" +
+                "  },\n" +
+                "  \"application_state\": {\n" +
+                "      \"value\": 37\n" +
+                "  },\n" +
+                "  \"analytics\": {\n" +
+                "        \"events\": [\n" +
+                "            {\n" +
+                "                \"name\": \"custom event\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"name\": \"another custom event\",\n" +
+                "                \"value\": {\n" +
+                "                    \"field\": \"some value\",\n" +
+                "                    \"second field\": {\n" +
+                "                        \"third field\": \"custom value\"\n" +
+                "                    }\n" +
+                "                }\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    },\n" +
+                "  \"version\": \"1.0\"\n" +
+                "}\n";
+    }
+
     String generateRequestButtonPressed() {
         String req = "\"request\": {\n" +
                 "    \"nlu\": {\n" +
@@ -117,6 +165,8 @@ public class AliceRequestAcceptTest {
         String generate();
     }
 
+
+
     String generateRequestAlice(CreateReqType reqType) {
         String request = "{\n" +
                 "  \"meta\": {\n" +
@@ -179,5 +229,10 @@ public class AliceRequestAcceptTest {
         ).andReturn();
         ResponseServer responseServer = objectMapper.readValue(result.getResponse().getContentAsString(), ResponseServer.class);
         log.info(responseServer.getResponse().getText());
+
+
+        ResponseServer responseServer1=objectMapper.readValue(generateResponse(), ResponseServer.class);
+        log.info(responseServer1.getResponse().getText());
     }
+
 }
