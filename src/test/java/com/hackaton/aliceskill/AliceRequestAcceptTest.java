@@ -227,12 +227,9 @@ public class AliceRequestAcceptTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/alice").contentType(MediaType.APPLICATION_JSON).content(request)).andExpect(status()
                 .isOk()
         ).andReturn();
-        ResponseServer responseServer = objectMapper.readValue(result.getResponse().getContentAsString(), ResponseServer.class);
-        log.info(responseServer.getResponse().getText());
 
-
-        ResponseServer responseServer1=objectMapper.readValue(generateResponse(), ResponseServer.class);
-        log.info(responseServer1.getResponse().getText());
+        ResponseServer responseServer1=objectMapper.readValue(result.getResponse().getContentAsString(), ResponseServer.class);
+        log.info(responseServer1.getResponse().getButtons().get(0).getTitle());
     }
 
 }

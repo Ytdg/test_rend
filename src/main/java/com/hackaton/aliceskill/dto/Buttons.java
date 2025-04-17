@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class Buttons {
     private  String title;
+    private  boolean hide;
 }
