@@ -19,6 +19,8 @@ public class Service {
 
     public ResponseServer talkYandexAlice(Request request) {
         ResponseServer responseServer = new ResponseServer();
+        System.out.println(request.getType()+"? type");
+        System.out.println(request.getCommand()+"? command");
         Response response = new Response();
         Buttons buttons = new Buttons();
         buttons.setHide(true);
